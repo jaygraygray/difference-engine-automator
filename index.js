@@ -1,38 +1,31 @@
-const express = require('express');
-      app = express();
-      bodyParser = require('body-parser');
-      cors = require('cors');
-      port = 9999;
-var   { buildSchema } = require('graphql');
-      graphqlHTTP = require('express-graphql')
+var express = require('express');
+var graphqlHTTP = require('express-graphql');
+var { buildSchema } = require('graphql');
 
-app.use(cors())
-app.use(bodyParser.json())
-
+// Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
-      type Query {
-            name: String,
-      }
+  type Query {
+    hello: String,
+    friends: Int
+  }
 `);
 
+// The root provides a resolver function for each API endpoint
 var root = {
-      hello: () => {
-            return 'Hello from the Other Side!'
-      },
-}
+  hello: () => {
+    return 'Hello world!';
+  },
+};
 
+var app = express();
 app.use('/graphql', graphqlHTTP({
-      schema: schema,
-      rootValue: root,
-      graphiql: true
-}))
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}));
 
-app.listen(port, console.log('Connected on port', port))
+app.listen(9999, console.log('Connected on port', 9999))
 
-
-students: {
-      
-}
 
 
 

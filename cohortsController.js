@@ -13,12 +13,8 @@ module.exports = {
       let cohortNames = data.filter( cohort => {
         let formatDate = new Date(cohort.date_start)
         return cohort.name === 'Web Dev Immersive' && moment(cohort.date_start).format('YYYY-MM-DD') == moment(matchDate).format('YYYY-MM-DD')
-      })
-      .map( cohort => {
-        return cohort.id
-      })
+      }).map( cohort => { return cohort.id })
       
-    
       resp.send(cohortNames)
 
     })

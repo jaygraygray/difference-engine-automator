@@ -2,6 +2,8 @@ var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
 
+var cohorts = require('./cohortsController.js')
+
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Query {
@@ -23,6 +25,8 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true,
 }));
+
+app.use('/api/getCohorts', cohorts.getAll)
 
 app.listen(9999, console.log('Connected on port', 9999))
 
